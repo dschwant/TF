@@ -55,7 +55,7 @@ sess = tf.InteractiveSession()
 x = tf.placeholder("float", [None, 1296])
 ## Known labels
 y_ = tf.placeholder("float", [None,5])
-
+#------------------------------------------
 # Hidden layer 1
 num_hidden1 = 128
 W1 = tf.Variable(tf.truncated_normal([1296,num_hidden1],
@@ -76,7 +76,8 @@ W3 = tf.Variable(tf.truncated_normal([num_hidden2, 5],
 b3 = tf.Variable(tf.constant(0.1,shape=[5]))
 
 # Just initialize
-sess.run(tf.initialize_all_variables())
+## OLD - sess.run(tf.initialize_all_variables())
+sess.run(tf.global_variables_initializer())
 
 # Define model
 y = tf.nn.softmax(tf.matmul(h2,W3) + b3)

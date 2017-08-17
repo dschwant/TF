@@ -76,17 +76,17 @@ y = tf.nn.softmax(tf.matmul(h1,W2) + b2)
 
 ### End model specification, begin training code
 
-
-# Climb on cross-entropy
-cross_entropy = tf.reduce_mean(
-        tf.nn.softmax_cross_entropy_with_logits(logits = y + 1e-50, labels = y_))
-
-# How we train
-train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
-
-# Define accuracy
-correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+	
+	# Climb on cross-entropy
+	cross_entropy = tf.reduce_mean(
+	        tf.nn.softmax_cross_entropy_with_logits(logits = y + 1e-50, labels = y_))
+	
+	# How we train
+	train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
+	
+	# Define accuracy
+	correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
+	accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 
 # Actually train
 epochs = 5000
@@ -102,7 +102,7 @@ for i in tqdm(range(epochs), ascii=True):
         A = accuracy.eval(feed_dict={x: test.reshape([-1,1296]), y_: onehot_test})
         test_acc[i//10] = A
     train_step.run(feed_dict={x: train.reshape([-1,1296]), y_: onehot_train})
-
+----------------------------------------------------------------------------------
 # Plot the accuracy curves
 plt.figure(figsize=(6,6))
 plt.plot(train_acc,'bo')
